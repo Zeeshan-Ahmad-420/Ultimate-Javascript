@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+         .cont {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            background-color: rgb(100, 99, 100);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+         }
+        #jokeButton {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #jokeDisplay {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    
+   <div class="cont">
+    <button id="jokeButton">Tell me a joke</button>
+    <p id="jokeDisplay"></p>
+   </div>
+
+    <script>
+        let jokes = [
+  "Why don’t skeletons fight each other? They don’t have the guts.",
+  "What do you call fake spaghetti? An impasta.",
+  "Why did the scarecrow win an award? Because he was outstanding in his field.",
+  "Why don’t eggs tell jokes? They’d crack each other up.",
+  "What do you call cheese that isn’t yours? Nacho cheese.",
+  "Why couldn’t the bicycle stand up by itself? It was two-tired.",
+  "What do you call a factory that makes good products? A satisfactory.",
+  "Why did the math book look sad? Because it had too many problems.",
+  "Why can’t your nose be 12 inches long? Because then it would be a foot.",
+  "How does the ocean say hi? It waves.",
+  "Why don’t oysters donate to charity? Because they are shellfish.",
+  "Why can’t you trust atoms? They make up everything.",
+  "Why did the golfer bring two pairs of pants? In case he got a hole in one.",
+  "Why was the computer cold? It left its Windows open.",
+  "Why did the tomato blush? Because it saw the salad dressing.",
+  "Why don’t elephants use computers? They’re afraid of the mouse.",
+  "Why was six afraid of seven? Because seven eight nine.",
+  "What do you call a sleeping bull? A bulldozer.",
+  "Why was the math teacher suspicious? She was too calculating.",
+  "Why did the cookie go to the hospital? Because he felt crummy.",
+  "Why did the student eat his homework? Because the teacher said it was a piece of cake.",
+  "Why are ghosts bad at lying? Because they are too transparent.",
+  "Why did the man run around his bed? Because he was trying to catch up on his sleep.",
+  "Why did the scarecrow get promoted? He was outstanding in his field.",
+  "Why did the chicken join a band? Because it had the drumsticks.",
+  "Why don’t seagulls fly over the bay? Because then they’d be bagels.",
+  "Why did the stadium get hot? All the fans left.",
+  "Why don’t cows have any money? Because farmers milk them dry.",
+  "Why did the man put his money in the freezer? He wanted cold hard cash.",
+  "Why did the belt go to jail? It held up a pair of pants.",
+  "Why don’t fish play basketball? They’re afraid of the net.",
+  "Why was the broom late? It swept in.",
+  "Why was the computer so smart? It listened to its motherboard.",
+  "Why did the cat sit on the computer? To keep an eye on the mouse.",
+  "Why do bees have sticky hair? Because they use honeycombs.",
+  "Why don’t some couples go to the gym? Because some relationships don’t work out.",
+  "Why did the smartphone go to school? It wanted to be smarter.",
+  "Why don’t bananas ever get lonely? Because they hang out in bunches.",
+  "Why can’t you give Elsa a balloon? Because she’ll let it go.",
+  "Why don’t mountains get cold in winter? They wear snow caps.",
+  "Why was the calendar nervous? Its days were numbered.",
+  "Why don’t scientists trust stairs? They’re always up to something.",
+  "Why did the barber win the race? Because he knew all the shortcuts.",
+  "Why was the picture sent to jail? It was framed.",
+  "Why don’t crabs ever share? Because they’re a little shellfish.",
+  "Why did the cow go to outer space? To see the moooon.",
+  "Why did the physics teacher break up with the biology teacher? They had no chemistry.",
+  "Why did the man put his watch in the safe? He wanted to save time.",
+  "Why did the book go to the doctor? It caught a bad case of writer’s block."
+];
+  
+ let button=document.getElementById("jokeButton");
+ let jokeDisplay=document.getElementById("jokeDisplay");
+ button.addEventListener("click",function(){
+    let randomJoke=Math.floor(Math.random()*jokes.length);
+    jokeDisplay.textContent=jokes[randomJoke]
+ })
+    </script>
+</body>
+</html>
