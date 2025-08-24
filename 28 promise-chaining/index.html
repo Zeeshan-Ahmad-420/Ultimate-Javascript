@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise-loadscript</title>
+</head>
+
+<body>
+    <script>
+        // Load Script function with promise
+        const loadScript = (src) => {
+            return new Promise((resolve, reject) => {
+                let script = document.createElement('script');
+                script.type = "text/javascript";
+                script.src = src
+                document.body.appendChild(script);
+                script.onload = () => {
+                    resolve("Script have been loaded");
+                }
+                script.onerror = () => {
+                    reject(0);
+                }
+            });
+        }
+        let p1 = loadScript("https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js");
+        p1.then((value) => {
+            console.log(value);
+        }).catch((error)=>{
+            console.log("we have problem to loading script");
+        })
+    </script>
+</body>
+
+</html>

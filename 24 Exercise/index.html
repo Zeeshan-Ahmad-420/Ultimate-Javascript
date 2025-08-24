@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clock using JS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(to right, #141e30, #243b55);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .cont {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            min-width: 300px;
+        }
+
+        .time {
+            font-size: 3rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .timer {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .timer li {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 25px;
+            border-radius: 10px;
+            min-width: 60px;
+            transition: background 0.3s;
+        }
+
+        .timer li:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .date {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        @media screen and (max-width: 500px) {
+            .time {
+                font-size: 2rem;
+            }
+
+            .timer {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .timer li {
+                min-width: auto;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cont">
+        <div class="time">
+            <ul class="timer" id="timer">
+              
+            </ul>
+        </div>
+        <div class="date" id="date"></div>
+    </div>
+
+    <script>
+        function update() {
+            let date = new Date();
+            let hours = date.getHours().toString().padStart(2, "0");
+            let min = date.getMinutes().toString().padStart(2, "0");
+            let sec = date.getSeconds().toString().padStart(2, "0");
+            let combine = `${hours}:${min}:${sec}`;
+            let ul = document.getElementsByClassName("timer")[0];
+            ul.innerHTML = ""
+            let li = document.createElement("li");
+            li.textContent = combine;
+            ul.appendChild(li);
+        }
+        update();
+        setInterval(update, 1000);
+
+        let dateElement = document.getElementsByClassName("date")[0];
+        dateElement.textContent = new Date().toLocaleDateString();
+
+
+
+
+    </script>
+</body>
+
+</html>
+
+

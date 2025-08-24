@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Events Explorer</title>
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #4cc9f0;
+            --warning: #ffba08;
+            --danger: #f94144;
+            --gray: #adb5bd;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding-bottom: 2rem;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .events-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .event-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.2rem;
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .card-description {
+            margin-bottom: 1.2rem;
+            color: #444;
+        }
+        
+        .demo-area {
+            background: var(--light);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.2rem;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .demo-element {
+            padding: 0.8rem 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+            margin: 0.5rem;
+        }
+        
+        .demo-element:hover {
+            background: var(--secondary);
+        }
+        
+        .input-demo {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--gray);
+            border-radius: 6px;
+            font-size: 1rem;
+            margin-top: 0.8rem;
+        }
+        
+        .input-demo:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .log-output {
+            background: #2b2d42;
+            color: var(--light);
+            padding: 1rem;
+            border-radius: 6px;
+            font-family: monospace;
+            min-height: 80px;
+            max-height: 150px;
+            overflow-y: auto;
+            margin-top: 1rem;
+        }
+        
+        .event-log {
+            color: var(--success);
+        }
+        
+        .key-log {
+            color: var(--warning);
+        }
+        
+        .form-demo {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--gray);
+        }
+        
+        @media (max-width: 768px) {
+            .events-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>JavaScript Events Explorer</h1>
+        <p class="subtitle">Learn about different JavaScript events with interactive examples. Interact with the elements below to see events in action.</p>
+    </header>
+    
+    <div class="container">
+        <div class="events-grid">
+            <!-- Mouse Events -->
+            <div class="event-card">
+                <div class="card-header">Mouse Events</div>
+                <div class="card-body">
+                    <p class="card-description">Events triggered by mouse interactions:</p>
+                    <div class="demo-area">
+                        <button class="demo-element" id="clickDemo">Click Me</button>
+                        <div class="demo-element" id="hoverDemo">Hover Over Me</div>
+                    </div>
+                    <div class="log-output" id="mouseLog">
+                        Mouse events will appear here...
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Keyboard Events -->
+            <div class="event-card">
+                <div class="card-header">Keyboard Events</div>
+                <div class="card-body">
+                    <p class="card-description">Events triggered by keyboard interactions:</p>
+                    <div class="demo-area">
+                        <input type="text" class="input-demo" id="keyboardDemo" placeholder="Type here...">
+                    </div>
+                    <div class="log-output" id="keyboardLog">
+                        Keyboard events will appear here...
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Form Events -->
+            <div class="event-card">
+                <div class="card-header">Form Events</div>
+                <div class="card-body">
+                    <p class="card-description">Events related to form elements:</p>
+                    <div class="demo-area">
+                        <form class="form-demo" id="formDemo">
+                            <input type="text" class="input-demo" placeholder="Enter your name" id="nameInput">
+                            <input type="email" class="input-demo" placeholder="Enter your email" id="emailInput">
+                            <button type="submit" class="demo-element">Submit Form</button>
+                        </form>
+                    </div>
+                    <div class="log-output" id="formLog">
+                        Form events will appear here...
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Document Events -->
+            <div class="event-card">
+                <div class="card-header">Document Events</div>
+                <div class="card-body">
+                    <p class="card-description">Events related to document loading and more:</p>
+                    <div class="demo-area">
+                        <button class="demo-element" id="loadDemo">Simulate Load Complete</button>
+                        <button class="demo-element" id="resizeDemo">Simulate Resize</button>
+                    </div>
+                    <div class="log-output" id="documentLog">
+                        Document events will appear here...
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Created with ❤️ for JavaScript enthusiasts | Try interacting with all the elements</p>
+        </footer>
+    </div>
+
+    <script>
+        // Wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            logDocumentEvent('DOM fully loaded and parsed');
+            
+            // Mouse event handlers
+            const clickDemo = document.getElementById('clickDemo');
+            const hoverDemo = document.getElementById('hoverDemo');
+            const mouseLog = document.getElementById('mouseLog');
+            
+            clickDemo.addEventListener('click', function() {
+                logMouseEvent('Button was clicked!');
+            });
+            
+            hoverDemo.addEventListener('mouseover', function() {
+                this.textContent = "Mouse is over me!";
+                logMouseEvent('Mouse over the div');
+            });
+            
+            hoverDemo.addEventListener('mouseout', function() {
+                this.textContent = "Hover Over Me";
+                logMouseEvent('Mouse out of the div');
+            });
+            
+            // Keyboard event handlers
+            const keyboardDemo = document.getElementById('keyboardDemo');
+            const keyboardLog = document.getElementById('keyboardLog');
+            
+            keyboardDemo.addEventListener('keydown', function(e) {
+                logKeyboardEvent(`Key DOWN: ${e.key} (Key code: ${e.code})`);
+            });
+            
+            keyboardDemo.addEventListener('keyup', function(e) {
+                logKeyboardEvent(`Key UP: ${e.key} (Key code: ${e.code})`);
+            });
+            
+            // Form event handlers
+            const formDemo = document.getElementById('formDemo');
+            const nameInput = document.getElementById('nameInput');
+            const emailInput = document.getElementById('emailInput');
+            const formLog = document.getElementById('formLog');
+            
+            nameInput.addEventListener('focus', function() {
+                logFormEvent('Name input focused');
+            });
+            
+            nameInput.addEventListener('blur', function() {
+                if(this.value) {
+                    logFormEvent(`Name input blurred with value: ${this.value}`);
+                }
+            });
+            
+            emailInput.addEventListener('focus', function() {
+                logFormEvent('Email input focused');
+            });
+            
+            emailInput.addEventListener('blur', function() {
+                if(this.value) {
+                    logFormEvent(`Email input blurred with value: ${this.value}`);
+                }
+            });
+            
+            formDemo.addEventListener('submit', function(e) {
+                e.preventDefault();
+                logFormEvent('Form submitted! (prevented default action)');
+                this.reset();
+            });
+            
+            // Document event handlers
+            const loadDemo = document.getElementById('loadDemo');
+            const resizeDemo = document.getElementById('resizeDemo');
+            const documentLog = document.getElementById('documentLog');
+            
+            window.addEventListener('load', function() {
+                logDocumentEvent('Window fully loaded (all resources)');
+            });
+            
+            window.addEventListener('resize', function() {
+                logDocumentEvent(`Window resized: ${window.innerWidth} x ${window.innerHeight}`);
+            });
+            
+            loadDemo.addEventListener('click', function() {
+                logDocumentEvent('Load complete simulation triggered');
+            });
+            
+            resizeDemo.addEventListener('click', function() {
+                logDocumentEvent('Resize simulation triggered');
+            });
+            
+            // Logging functions
+            function logMouseEvent(message) {
+                mouseLog.innerHTML += `<div class="event-log">${getTimestamp()} - ${message}</div>`;
+                mouseLog.scrollTop = mouseLog.scrollHeight;
+            }
+            
+            function logKeyboardEvent(message) {
+                keyboardLog.innerHTML += `<div class="key-log">${getTimestamp()} - ${message}</div>`;
+                keyboardLog.scrollTop = keyboardLog.scrollHeight;
+            }
+            
+            function logFormEvent(message) {
+                formLog.innerHTML += `<div class="event-log">${getTimestamp()} - ${message}</div>`;
+                formLog.scrollTop = formLog.scrollHeight;
+            }
+            
+            function logDocumentEvent(message) {
+                documentLog.innerHTML += `<div class="event-log">${getTimestamp()} - ${message}</div>`;
+                documentLog.scrollTop = documentLog.scrollHeight;
+            }
+            
+            function getTimestamp() {
+                const now = new Date();
+                return `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}:${now.getSeconds().toString().padStart(2, '0')}`;
+            }
+        });
+    </script>
+</body>
+</html>
